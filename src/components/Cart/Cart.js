@@ -9,7 +9,7 @@ export default function Cart(props) {
     ].map(item => <li key={item.id}>{item.name}</li>)}</ul>;
 
     return (
-        <Modal>
+        <Modal onClose={props.onCloseCart}>
             {cartItems}
 
             <div className={styles.total}>
@@ -18,7 +18,7 @@ export default function Cart(props) {
             </div>
 
             <div className={styles.actions}>
-                <button className={styles['button--alt']}>Close</button>
+                <button className={styles['button--alt']} onClick={props.onCloseCart}>Close</button>
                 <button className={styles.button}>Order</button>
             </div>
         </Modal>
