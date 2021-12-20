@@ -24,7 +24,7 @@ export default function Cart(props) {
 
             <div className={styles.actions}>
                 <button className={styles['button--alt']} onClick={props.onCloseCart}>Close</button>
-                <button className={styles.button}>Order</button>
+                {ctx.items.length > 0 && <button className={styles.button}>Order</button>}
             </div>
         </Modal>
     )
