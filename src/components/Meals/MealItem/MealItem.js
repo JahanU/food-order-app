@@ -1,7 +1,5 @@
 import styles from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
-import { useContext } from 'react';
-import CartContext from '../../../store/cart-context';
 
 export default function MealItem(props) {
 

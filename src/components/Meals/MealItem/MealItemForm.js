@@ -17,8 +17,9 @@ export default function MealItemForm(props) {
         if (enteredAmount.length === 0 || enteredAmount <= 0) {
             return setAmountIsValid(false);
         }
+
         const item = {
-            ...props,
+            ...props.meal,
             amount: enteredAmount,
         }
         cartContext.addItem(item);
