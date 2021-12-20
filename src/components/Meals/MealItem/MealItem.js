@@ -1,4 +1,5 @@
 import styles from './MealItem.module.css';
+import MealItemForm from './MealItemForm';
 
 export default function MealItem(props) {
 
@@ -12,7 +13,9 @@ export default function MealItem(props) {
                 <div className={styles.price}>{price}</div>
             </div>
 
-            <div></div>
+            <div>
+                <MealItemForm id={props.id}></MealItemForm>
+            </div>
         </li>
     )
 }
