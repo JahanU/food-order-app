@@ -1,10 +1,11 @@
 import Header from './components/UI/Header/Header';
+import Meals from './components/Meals/Meals';
 
 function App() {
   return (
     <>
       <Header></Header>
-      <h2>Let's get started!</h2>
+      <Meals></Meals>
     </>
   );
 }
