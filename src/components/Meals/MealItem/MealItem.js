@@ -1,5 +1,7 @@
 import styles from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
+import { useContext } from 'react';
+import CartContext from '../../../store/cart-context';
 
 export default function MealItem(props) {
 
@@ -14,7 +16,7 @@ export default function MealItem(props) {
             </div>
 
             <div>
-                <MealItemForm id={props.id}></MealItemForm>
+                <MealItemForm id={props.id} meal={props} ></MealItemForm>
             </div>
         </li>
     )
