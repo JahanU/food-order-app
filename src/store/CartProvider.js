@@ -3,15 +3,16 @@ import React, { useReducer } from 'react';
 
 const defaultCartState = {
     items: [],
-    totalAmount: 0
+    totalPrice: 0
 }
 
 const cartReducer = (state, action) => {
+    console.log('provider')
     if (action.type === 'ADD') {
         let updatedItems;
-        const itemInCart = state.items.find((item) => item.id === action.item.id);
+        const updatedTotalPrice = (action.item.price * action.item.amount) + state.totalPrice;
         const itemInCartIndex = state.items.findIndex((item) => item.id === action.item.id);
-        const updatedTotalAmount = (action.item.price * action.item.amount) + state.totalAmount;
+        const itemInCart = state.items[itemInCartIndex];
 
         if (itemInCart) { // just inc the amount
             const updateItem = {
@@ -27,15 +28,34 @@ const cartReducer = (state, action) => {
 
         return {
             items: updatedItems,
-            totalAmount: updatedTotalAmount
+            totalPrice: updatedTotalPrice
         }
     }
-    else if (state.type === 'REMOVE') {
-        const updatedItems = state.items.filter(item => item.id !== action.id);
-        const updatedTotalAmount = (action.item.price * action.item.amount) - state.totalAmount;
+    else if (action.type === 'REMOVE') {
+        let updatedItems;
+        const itemInCartIndex = state.items.findIndex((item) => item.id === action.id);
+        const itemInCart = state.items[itemInCartIndex];
+        const updatedTotalPrice = state.totalPrice - itemInCart.price;
+
+        // decrement
+        if (itemInCart.amount > 1) {
+            const updateItem = {
+                ...itemInCart,
+                amount: itemInCart.amount - 1
+            };
+            updatedItems = [...state.items];
+            updatedItems[itemInCartIndex] = updateItem;
+        }
+        // decrement until amount = 0, then remove
+        else if (itemInCart.amount === 1) {
+            updatedItems = [...state.items];
+            updatedItems.splice(itemInCartIndex, 1);
+        }
+
+        console.log(updatedItems);
         return {
             items: updatedItems,
-            totalAmount: updatedTotalAmount
+            totalPrice: updatedTotalPrice
         }
     }
     return defaultCartState;
@@ -56,7 +76,7 @@ export default function CartProvider(props) {
 
     const cartContext = {
         items: cartState.items,
-        totalAmount: cartState.totalAmount,
+        totalPrice: cartState.totalPrice,
         addItem: addItemHandler,
         removeItem: removeItemHandler
     }

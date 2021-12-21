@@ -9,7 +9,7 @@ export default function CartItem(props) {
         <h2>{props.name}</h2>
         <div className={classes.summary}>
           <span className={classes.price}>{price}</span>
-          <span className={classes.amount}>x {props.amount}</span>
+          <span className={classes.amount}>x {props.price}</span>
         </div>
       </div>
       <div className={classes.actions}>

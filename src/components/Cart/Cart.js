@@ -7,14 +7,15 @@ import CartItem from './CartItem';
 export default function Cart(props) {
 
     const ctx = useContext(CartContext);
-    const totalAmount = ctx.totalAmount.toFixed(2);
+    const totalPrice = ctx.totalPrice.toFixed(2);
 
     const increaseQuantityHandler = (item) => {
         ctx.addItem({ ...item, amount: 1 })
     };
 
     const decreaseQuantityHandler = (id) => {
-
+        console.log(id)
+        ctx.removeItem(id);
     };
 
     return (
@@ -33,7 +34,7 @@ export default function Cart(props) {
 
             <div className={styles.total}>
                 <span>Total Amount</span>
-                <span>£ {totalAmount}</span>
+                <span>£ {totalPrice}</span>
             </div>
 
             <div className={styles.actions}>
