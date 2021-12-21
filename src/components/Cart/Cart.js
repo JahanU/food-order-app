@@ -9,25 +9,23 @@ export default function Cart(props) {
     const ctx = useContext(CartContext);
     const totalAmount = ctx.totalAmount.toFixed(2);
 
-    const addToCartHandler = (item) => {
-
+    const increaseQuantityHandler = (item) => {
+        ctx.addItem({ ...item, amount: 1 })
     };
 
-    const removeFromCartHandler = (id) => {
+    const decreaseQuantityHandler = (id) => {
 
     };
 
     return (
         <Modal onClose={props.onCloseCart}>
-
-
             <ul className={styles['cart-items']}>
                 {ctx.items.map(item =>
                     <CartItem
                         key={item.id}
                         {...item}
-                        onRemove={removeFromCartHandler.bind(null, item.id)}
-                        onAdd={addToCartHandler.bind(null, item)}
+                        onAdd={increaseQuantityHandler.bind(null, item)}
+                        onRemove={decreaseQuantityHandler.bind(null, item.id)}
                     >
                     </CartItem>)}
             </ul>
